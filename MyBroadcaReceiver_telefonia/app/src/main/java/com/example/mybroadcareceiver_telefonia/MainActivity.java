@@ -32,49 +32,51 @@ public class MainActivity extends AppCompatActivity {
     public String txtNumero; //Cadena que almacena el numero ingresado en el EditText para compararlo con el numero de llamada de entrada
     public String numLlamada; //Cadena donde se almacena el inComingNumber para compararlo con el ingresado en el EditText y enviar sms
 
+    public boolean permiso= false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        permisoMensaje();
         number = findViewById(R.id.inputNumber);
         message = findViewById(R.id.inputMsg);
         send = findViewById(R.id.btnSend);
 
         mTelephonyManager = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE); //Administrador de la telefonia
 
-        send.setEnabled(false);
+        //send.setEnabled(false);
 
-        if(
+            /*if(
                 //!checkPermission(Manifest.permission.SEND_SMS)   &&
-                        //!checkPermission(Manifest.permission.READ_PHONE_STATE) &&
-            !checkPermission(Manifest.permission.CALL_PHONE)
-        ) // Se verifica que los permisos hayan sido consedidos
-        {
-           permisoLLamada();
-        } else {
-            send.setEnabled(true);
-            }
+                //!checkPermission(Manifest.permission.READ_PHONE_STATE) &&
+                    !checkPermission(Manifest.permission.CALL_PHONE)
+            ) // Se verifica que los permisos hayan sido consedidos
+            {
+
+               // permiso=true;
+            } else {
+                send.setEnabled(true);
+            }*/
 
         }
 
 
-    public void permisoLLamada(){
+    /*public void permisoLLamada(){
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.CALL_PHONE},SEND_SMS_PERMISSION_REQUEST_CODE);
-
-
-    }
+    }*/
     public void permisoMensaje(){
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.SEND_SMS}, SEND_SMS_PERMISSION_REQUEST_CODE); //Pide el permiso para mandar sms
     }
-    public void permisoEstado(){
+
+   /* public void permisoEstado(){
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.READ_PHONE_STATE}, 1); // Pide el permiso para checar el estado de llamadas
 
-    }
+    }*/
 
     PhoneStateListener mPhoneStateListener = new PhoneStateListener() { //EventListener del estado de la callamada recibida en el celular
         @Override
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void send() //Metodo Para Mandar El SMS Al Numero Del Edit Text
     {
-        permisoMensaje();
+        //permisoMensaje();
         txtNumero = number.getText().toString(); //Se obtienens los datos de las
         txtMensaje = message.getText().toString(); //cajas de texto, proporcionadas por el usuario :v
 
